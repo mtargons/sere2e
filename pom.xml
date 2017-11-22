@@ -26,8 +26,8 @@
 		<webdriver.base.url>http://google.com</webdriver.base.url>
 
 		<bs.url></bs.url>
-		<bs.os>OSX</bs.os>
-		<bs.browser>Safari</bs.browser>
+		<bs.os>WINDOWS</bs.os>
+		<bs.browser>IE</bs.browser>
 	</properties>
 
 	<repositories>
