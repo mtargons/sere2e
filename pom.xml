@@ -24,6 +24,10 @@
 		<tags/>
 		<parallel.tests>4</parallel.tests>
 		<webdriver.base.url>http://google.com</webdriver.base.url>
+
+		<bs.url></bs.url>
+		<bs.os>OSX</bs.os>
+		<bs.browser>Safari</bs.browser>
 	</properties>
 
 	<repositories>
@@ -102,14 +106,14 @@
 	</dependencies>
 	<build>
 		<plugins>
-			<!--<plugin>-->
-				<!--<groupId>org.apache.maven.plugins</groupId>-->
-				<!--<artifactId>maven-surefire-plugin</artifactId>-->
-				<!--<version>2.20</version>-->
-				<!--<configuration>-->
-					<!--<skip>true</skip>-->
-				<!--</configuration>-->
-			<!--</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<version>2.20</version>
@@ -122,15 +126,9 @@
 					</includes>
 					<systemPropertyVariables>
 						<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-						<!--<webdriver.chrome.driver>C:\Users\\.m2\repository\webdriver\chromedriver\win32\2.33\chromedriver.exe</webdriver.chrome.driver>-->
-						<!--<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
-						<!--<webdriver.driver>chrome</webdriver.driver>-->
 						<browserstack.url>${bs.url}</browserstack.url>
-						<!--<browserstack.browser>chrome</browserstack.browser>-->
-						<browserstack.os>WINDOWS</browserstack.os>
-						<browserstack.os_version>XP</browserstack.os_version>
-						<browserstack.browser>IE</browserstack.browser>
-						<browserstack.browser_version>6</browserstack.browser_version>
+						<browserstack.os>${bs.os}</browserstack.os>
+						<browserstack.browser>${bs.browser}</browserstack.browser>
 					</systemPropertyVariables>
 					<parallel>classes</parallel>
 					<threadCount>${parallel.tests}</threadCount>
@@ -178,7 +176,6 @@
 		<profile>
 			<id>BS_CHROME</id>
 			<properties>
-				<bs.url></bs.url>
 				<bs.os>OSX</bs.os>
 				<bs.browser>chrome</bs.browser>
 			</properties>
@@ -186,70 +183,9 @@
 		<profile>
 			<id>BS_FIREFOX</id>
 			<properties>
-				<bs.url></bs.url>
 				<bs.os>OSX</bs.os>
 				<bs.browser>firefox</bs.browser>
 			</properties>
-		</profile>
-		<profile>
-			<id>CHROME_LOCAL</id>
-			<build>
-				<plugins>
-					<plugin>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.20</version>
-						<configuration>
-							<includes>
-								<include>**/*Test.java</include>
-								<include>**/Test*.java</include>
-								<include>**/*TestSuite.java</include>
-								<include>**/When*.java</include>
-							</includes>
-							<systemPropertyVariables>
-								<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
-								<webdriver.remote.driver>chrome</webdriver.remote.driver>
-								<webdriver.remote.url><!-- docker --></webdriver.remote.url>
-							</systemPropertyVariables>
-							<parallel>classes</parallel>
-							<threadCount>${parallel.tests}</threadCount>
-							<forkCount>${parallel.tests}</forkCount>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>integration-test</goal>
-									<goal>verify</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-compiler-plugin</artifactId>
-						<configuration>
-							<source>${java.version}</source>
-							<target>${java.version}</target>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>net.serenity-bdd.maven.plugins</groupId>
-						<artifactId>serenity-maven-plugin</artifactId>
-						<version>${serenity.maven.version}</version>
-						<configuration>
-							<tags>${tags}</tags>
-						</configuration>
-						<executions>
-							<execution>
-								<id>serenity-reports</id>
-								<phase>post-integration-test</phase>
-								<goals>
-									<goal>aggregate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
 		</profile>
 	</profiles>
 
