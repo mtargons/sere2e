@@ -125,7 +125,7 @@
 						<!--<webdriver.chrome.driver>C:\Users\\.m2\repository\webdriver\chromedriver\win32\2.33\chromedriver.exe</webdriver.chrome.driver>-->
 						<!--<webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
 						<!--<webdriver.driver>chrome</webdriver.driver>-->
-						<browserstack.url></browserstack.url>
+						<browserstack.url>${bs.url}</browserstack.url>
 						<!--<browserstack.browser>chrome</browserstack.browser>-->
 						<browserstack.os>WINDOWS</browserstack.os>
 						<browserstack.os_version>XP</browserstack.os_version>
